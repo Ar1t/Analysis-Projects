@@ -1,0 +1,32 @@
+
+import yfinance as yf
+import pandas as pd
+
+# Define the ticker symbol for the stock you want to analyze
+tickerSymbol = "AAPL"
+
+# Download the stock data (using yfinance)
+startDate = "2020-01-01"
+endDate = "2024-03-22"  # Adjust the end date as needed
+appleData = yf.download(tickerSymbol, start=startDate, end=endDate)
+
+# Print the first 5 rows of the data to get an idea of the structure
+print(appleData.head())
+
+# Explore the data using Pandas methods
+print("Closing price on most recent day:", appleData['Close'][-1])
+
+# Calculate the daily price change
+appleData['Daily Change'] = appleData['Close'] - appleData['Open']
+
+# Analyze descriptive statistics of the daily change
+dailyChangeStats = appleData['Daily Change'].describe()
+print("Daily Change Statistics:")
+print(dailyChangeStats)
+
+# Visualize the daily closing price (using Matplotlib, not included here)
+# import matplotlib.pyplot as plt
+# plt.plot(appleData['Close'])
+# plt.show()
+
+# You can perform further analysis based on your project goals (e.g., calculating moving averages, plotting trends)
